@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import stanfordnlp
 
 from download_model import DEFAULT_MODEL_DIR
@@ -44,6 +44,37 @@ def data_(form):
 @app.route('/', methods=['GET'])
 def return_tmp_data():
     return data_(DocumentView)
+
+
+@app.route('/parse', methods=['GET'])
+def parse():
+    text = request.args.get('text', '')
+    data = dict(text=text)
+    if text:
+        data['sentences'] = []
+        doc = nlp(text)
+        tokens = []
+        text_ = []
+        for token in doc.conll_file.conll_as_string().split('\n')[:-1]:
+            token_ = token.split('\t')
+            if len(token_) == 1:
+                data['sentences'].append({
+                    'tokens': tokens,
+                    'text': ' '.join(text_),
+                })
+
+                tokens = []
+                text_ = []
+            else:
+                tokens.append(token_)
+                text_.append(token_[1])
+        else:
+            if tokens:
+                data['sentences'].append({
+                    'tokens': tokens,
+                    'text': ' '.join(text_),
+                })
+    return render_template('parse.html', data=data)
 
 
 if __name__ == '__main__':

@@ -32,6 +32,14 @@ http://localhost:5020/?document=This%20is%20a%20test%20sentence.
 などによってCONLLの結果が返ります。
 (Postmanなどを使うと見やすいです。)
 
+http://localhost:5020/parse
+
+にアクセスすると、parse用のページを表示します。
+
+例
+
+![画面](screenshot.png?raw=true)
+
 ## ToDo
 
 - dockerfile
