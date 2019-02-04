@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="{{ url_for('parse') }}" method=get>
+      <dl>
+        <dd><textarea name=text rows=5 cols=40>{{data.text}}</textarea>
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+
+  {% if data.sentences %}
+  {% for sentence in data.sentences %}
+    {{sentence.text}}
+  <table border="1">
+   <tr>
+       <th width="80">ID</th>
+       <th width="80">FORM</th>
+       <th width="80">LEMMA</th>
+       <th width="80">UPOS</th>
+       <th width="80">XPOS</th>
+       <th width="480">FEATS</th>
+       <th width="80">HEAD</th>
+       <th width="80">DEPREL</th>
+       <th width="80">DEPS</th>
+       <th width="80">MISC</th>
+  </tr>
+    {% for token in sentence.tokens %}
+  <tr>
+      {% for entity in token %}
+    <td>{{entity}}</td>
+      {% endfor %}
+  </tr>
+    {% endfor %}
+  </table>
+  {% endfor %}
+  {% endif %}
+
+</body>
+</html>
