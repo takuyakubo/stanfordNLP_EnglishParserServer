@@ -9,7 +9,7 @@ RUN apt-get update && \
      git clone https://github.com/takuyakubo/stanfordNLP_EnglishParserServer.git && \
      cd stanfordNLP_EnglishParserServer && \
      git fetch && \
-     git checkout -b add_dockerfile origin/add_dockerfile && \
+     git checkout -b add-dockerfile origin/add-dockerfile && \
      pip install --upgrade pip && \
      pip install https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-cp37m-linux_x86_64.whl && \
      pip install torchvision && \
