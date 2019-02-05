@@ -1,13 +1,14 @@
+import sys
+
 from flask import Flask, request, jsonify, render_template
 import stanfordnlp
 
-from download_model import DEFAULT_MODEL_DIR
+from download_model import DEFAULT_MODEL_DIR, download, default_treebanks
 
 app = Flask(__name__)
 default_port = 5020
 default_host = "0.0.0.0"
-
-nlp = stanfordnlp.Pipeline(models_dir=DEFAULT_MODEL_DIR)
+default_lang = "en"
 
 
 class DocumentView:
@@ -95,4 +96,9 @@ def parse():
 
 
 if __name__ == '__main__':
+    lang = sys.argv[1] if len(sys.argv) > 1 else default_lang
+    if lang not in default_treebanks:
+        lang = default_lang
+    download(lang)
+    nlp = stanfordnlp.Pipeline(models_dir=DEFAULT_MODEL_DIR, lang=lang)
     app.run(port=default_port, host=default_host)
