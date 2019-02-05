@@ -2,3 +2,5 @@ torch
 torchvision
 stanfordnlp
 flask
+requests
+tqdm
