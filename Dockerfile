@@ -15,10 +15,10 @@ RUN apt-get update && \
      pip install torchvision && \
      pip install stanfordnlp && \
      pip install flask && \
-     pip install requests && \
-     pip install tqdm && \
      python download_model.py
 
 WORKDIR /opt/app/stanfordNLP_EnglishParserServer
+
+EXPOSE 5020
 
 CMD ["python", "server.py"]
