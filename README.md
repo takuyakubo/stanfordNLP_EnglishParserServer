@@ -54,8 +54,13 @@ docker build -t snlp .
 docker run -it -p 5020:5020 snlp
 ```
 
+もしくはdockerhubに上がっている[image](https://cloud.docker.com/u/takuyakubo/repository/docker/takuyakubo/snlp)を使うこともできます。
 
-## ToDo
+```bash
+docker run -it -p 5020:5020 takuyakubo/snlp:english
+```
+
+## To Do
 
 - 他言語(特に日本語)
 - dockerfileなどの最適化
