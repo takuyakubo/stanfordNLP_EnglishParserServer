@@ -3,11 +3,12 @@ import subprocess
 
 import requests
 from tqdm import tqdm
-from stanfordnlp.utils.resources import unzip_ud_model
+from stanfordnlp.utils.resources import unzip_ud_model, default_treebanks
 
 DEFAULT_MODEL_DIR = './stanford_resource'
 
-def download(lang_name, resource_dir=DEFAULT_MODEL_DIR, should_unzip=True):
+def download(lang, resource_dir=DEFAULT_MODEL_DIR, should_unzip=True):
+    lang_name = default_treebanks[lang]
     if resource_dir is not None and os.path.exists(f"{resource_dir}/{lang_name}_models"):
         return
     download_dir = resource_dir
@@ -34,4 +35,4 @@ def download(lang_name, resource_dir=DEFAULT_MODEL_DIR, should_unzip=True):
 
 
 if __name__ == '__main__':
-    download('en_ewt')
+    download('en')

@@ -10,19 +10,22 @@ Python 3.7.2 で動作を確認しています。
 
 ```bash
 pip isntall -r requirements.txt
-python download_model.py
 ```
 
-このrepositoryのルート直下に`stanford_resource`という名前のディレクトリが作成されその中に2.67GB程度のモデルがダウンロードされます。
 
 ## start the server
 
 次をおこなってください。
 
 ```bash
-python server.py
+python server.py [lang]
 ```
 
+`lang`　には en(英語), ja(日本語) などが入ります。
+langがない場合は英語が選択されます。
+
+このrepositoryのルート直下に`stanford_resource`という名前のディレクトリが作成され
+その中に言語依存のモデル(英語であれば2.67GB程度)がダウンロードされます。
 しばらくするとserverが起動します。
 
 起動後, 
@@ -45,13 +48,13 @@ http://localhost:5020/
 次を行うことでdocker image(4.0GB程度)を作成できます。
 
 ```bash
-docker build -t snlp .
+docker build -t usnlp .
 ```
 
 次でserverの立ち上げができます(memoryを8GBなど多めにとることを推奨します。)
 
 ```bash
-docker run -it -p 5020:5020 snlp
+docker run -it -p 5020:5020 usnlp
 ```
 
 もしくはdockerhubに上がっている[image](https://cloud.docker.com/u/takuyakubo/repository/docker/takuyakubo/snlp)を使うこともできます。
@@ -62,5 +65,4 @@ docker run -it -p 5020:5020 takuyakubo/snlp:english
 
 ## To Do
 
-- 他言語(特に日本語)
 - dockerfileなどの最適化
