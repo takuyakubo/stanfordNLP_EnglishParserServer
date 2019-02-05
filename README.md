@@ -40,7 +40,22 @@ http://localhost:5020/
 
 ![画面](screenshot.png?raw=true)
 
+## docker 
+
+次を行うことでdocker image(4.0GB程度)を作成できます。
+
+```bash
+docker build -t snlp .
+```
+
+次でserverの立ち上げができます(memoryを8GBなど多めにとることを推奨します。)
+
+```bash
+docker run -it -p 5020:5020 snlp
+```
+
+
 ## ToDo
 
-- dockerfile
 - 他言語(特に日本語)
+- dockerfileなどの最適化
