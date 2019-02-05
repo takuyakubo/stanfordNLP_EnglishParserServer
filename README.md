@@ -1,4 +1,4 @@
-# Stanford NLP English Parser Server
+# Stanford NLP Parser Server
 
 このrepositoryはstanfordnlpをflaskでAPI化したものです。
 
@@ -21,48 +21,53 @@ pip isntall -r requirements.txt
 python server.py [lang]
 ```
 
-`lang`　には en(英語), ja(日本語) などが入ります。
-langがない場合は英語が選択されます。
+`lang` には `en`(英語), `ja`(日本語) などが入ります。
+`lang`がない場合は英語が選択されます。
 
-このrepositoryのルート直下に`stanford_resource`という名前のディレクトリが作成され
+このrepositoryの直下に`stanford_resource`という名前のディレクトリが作成され
 その中に言語依存のモデル(英語であれば2.67GB程度)がダウンロードされます。
-しばらくするとserverが起動します。
+(2回目以降はダウンロードが省略されます。)
 
-起動後, 
+モデルがロードされ、しばらくするとサーバが起動します。
 
-http://localhost:5020/api?document=This%20is%20a%20test%20sentence.
-
-などによってCONLLの結果が返ります。
-(Postmanなどを使うと見やすいです。)
-
-http://localhost:5020/
-
-にアクセスすると、parse用のページを表示します。
-
-例
-
-![画面](screenshot.png?raw=true)
 
 ## docker 
 
-次を行うことでdocker image(4.0GB程度)を作成できます。
+次を行うことでdocker image(1.4GB程度)を作成できます。
 
 ```bash
 docker build -t usnlp .
 ```
 
 次でserverの立ち上げができます(memoryを8GBなど多めにとることを推奨します。)
+modelのダウンロード、ロードを行うため立ち上がりまで時間がかかります。
 
+(日本語のparserの場合)
 ```bash
-docker run -it -p 5020:5020 usnlp
+docker run -e LANGUAGE=ja -it -p 5020:5020 usnlp
 ```
 
-もしくはdockerhubに上がっている[image](https://cloud.docker.com/u/takuyakubo/repository/docker/takuyakubo/snlp)を使うこともできます。
+もしくはdockerhubに上がっている[image](https://cloud.docker.com/u/takuyakubo/repository/docker/takuyakubo/usnlp)を使うこともできます。
 
 ```bash
-docker run -it -p 5020:5020 takuyakubo/snlp:english
+docker run -e LANGUAGE=ja -it -p 5020:5020 takuyakubo/usnlp
 ```
 
-## To Do
+## 起動後
+
+http://localhost:5020/api?document=This%20is%20a%20test%20sentence.
+
+などによってCONLLの結果が返ります。
+([Postman](https://www.getpostman.com/)などを使うと見やすいです。)
+
+http://localhost:5020/
+
+にアクセスすると、parse用のページを表示します。
+
+例(英語)
+
+![画面](screenshot.png?raw=true)
+
+## To do
 
 - dockerfileなどの最適化
