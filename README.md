@@ -27,12 +27,12 @@ python server.py
 
 起動後, 
 
-http://localhost:5020/?document=This%20is%20a%20test%20sentence.
+http://localhost:5020/api?document=This%20is%20a%20test%20sentence.
 
 などによってCONLLの結果が返ります。
 (Postmanなどを使うと見やすいです。)
 
-http://localhost:5020/parse
+http://localhost:5020/
 
 にアクセスすると、parse用のページを表示します。
 

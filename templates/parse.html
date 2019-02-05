@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Parse Document</title>
 </head>
 <body>
     <form action="{{ url_for('parse') }}" method=get>
       <dl>
-        <dd><textarea name=text rows=5 cols=40>{{data.text}}</textarea>
+        <dd><textarea name=document rows=5 cols=40>{{data.document}}</textarea>
         <dd><input type=submit value=Submit>
       </dl>
     </form>
@@ -30,9 +30,16 @@
   </tr>
     {% for token in sentence.tokens %}
   <tr>
-      {% for entity in token %}
-    <td>{{entity}}</td>
-      {% endfor %}
+      <td>{{token.id}}</td>
+      <td>{{token.form}}</td>
+      <td>{{token.lemma}}</td>
+      <td>{{token.upos}}</td>
+      <td>{{token.xpos}}</td>
+      <td>{{token.feats}}</td>
+      <td>{{token.head}}</td>
+      <td>{{token.deprel}}</td>
+      <td>{{token.deps}}</td>
+      <td>{{token.misc}}</td>
   </tr>
     {% endfor %}
   </table>
