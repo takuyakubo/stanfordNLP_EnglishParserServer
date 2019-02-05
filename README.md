@@ -1,4 +1,4 @@
-# Stanford NLP Parser Server
+# Stanford NLP Server
 
 このrepositoryはstanfordnlpをflaskでAPI化したものです。
 
